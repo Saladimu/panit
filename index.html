@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evoke 2026 - Panitia</title>
-	  <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         html, body {
             margin: 0;
@@ -13,15 +13,73 @@
             height: 100%;
             overflow: hidden;
             background-color: #ffffff;
+            font-family: sans-serif;
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
+        /* Splash Screen Overlay */
+        #splash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000; /* Dark background to make the image stand out */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Ensures it sits on top of the iframe */
+            cursor: pointer;
+        }
+        #splash-image {
+            max-width: 80%;
+            max-height: 70%;
+            object-fit: contain;
+        }
+        #splash-text {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-top: 20px;
+            letter-spacing: 1px;
+            animation: blink 1.5s infinite; /* Optional blinking effect for arcade feel */
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Splash Screen -->
+    <div id="splash-overlay">
+        <img src="design1.png" alt="Design 1" id="splash-image">
+        <div id="splash-text">PRESS ANY KEY TO CONTINUE</div>
+    </div>
+
+    <!-- Main Content -->
     <iframe src="https://www.appsheet.com/start/3777408b-7d8e-4c2a-9f7c-79707579d60c?platform=desktop#appName=Evokerebuilt-110568804&vss=H4sIAAAAAAAAA6WOzQrCMBCEX0XmnCfITURERC-KF-MhNlsJtklpUrWEvLtbf9CrepxZvm8n4Wzpso66OEHu0jstqIdEUtj0DSlIhYl3sfWVglBY6fpRjo_kjB7NyHDOyHvxUkQKkOlrg_x7g4A15KItLbWDboBZ80T5PIBcfGDIAnUX9aGi-3LGcuau9EUXyGx50G9DwtxNr412Zun5iyx1FSjfAMjnxzB0AQAA&view=Agenda%20Gede"></iframe>
+
+    <script>
+        const overlay = document.getElementById('splash-overlay');
+
+        // Function to hide the splash screen
+        function dismissSplash() {
+            overlay.style.display = 'none';
+            // Remove listeners so they don't fire again
+            window.removeEventListener('keydown', dismissSplash);
+            window.removeEventListener('click', dismissSplash);
+        }
+
+        // Listen for any keyboard key press
+        window.addEventListener('keydown', dismissSplash);
+        
+        // Optional: Also dismiss on mouse click for mobile/touch users
+        window.addEventListener('click', dismissSplash);
+    </script>
 </body>
 </html>
