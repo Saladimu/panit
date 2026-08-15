@@ -14,7 +14,7 @@
             overflow: hidden;
             background-color: #ffffff;
             font-family: sans-serif;
-            /* Layout structural adjustments for Idea 1 banner stacking */
+            /* Flex layout ensures the banner and iframe stack neatly */
             display: flex;
             flex-direction: column;
         }
@@ -30,12 +30,12 @@
             letter-spacing: 1px;
             width: 100%;
             box-sizing: border-box;
-            flex-shrink: 0; /* Prevents the banner layout from squeezing shrinkages */
+            flex-shrink: 0; /* Prevents layout shrinkage */
         }
 
         iframe {
             width: 100%;
-            flex-grow: 1; /* Automatically stretches to safely consume remaining browser space */
+            flex-grow: 1; /* Stretches to fill the remaining screen space */
             border: none;
         }
 
@@ -53,7 +53,7 @@
             align-items: center;
             z-index: 9999;
             cursor: pointer;
-            transition: opacity 0.5s ease; /* Adds a smooth fade-out effect */
+            transition: opacity 0.5s ease; /* Adds smooth fade-out effect */
             opacity: 1;
         }
         /* Shared image optimization styles */
@@ -71,11 +71,19 @@
             .mobile-only { display: block; }
             .desktop-only { display: none; }
             .splash-img {
-                max-width: 95%; /* Offers slightly wider view on compact phones */
-                max-height: 70%;
+                max-width: 95%;
+                max-height: 65%;
+            }
+            #splash-text {
+                font-size: 1.2rem;
+            }
+            .splash-warning {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+                max-width: 85%;
             }
             .internal-banner {
-                font-size: 0.75rem; /* Reduces text sizing scale for small viewports */
+                font-size: 0.75rem;
                 padding: 6px 8px;
             }
         }
@@ -93,11 +101,27 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.3; }
         }
+
+        /* Splash Warning Text Configuration (Idea 2 - Bold White) */
+        .splash-warning {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-top: 25px;
+            letter-spacing: 0.5px;
+            text-align: center;
+            border: 2px solid #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            background-color: rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
 
-    <!-- Splash Screen -->
+    <!-- Splash Screen (Idea 2) -->
     <div id="splash-overlay">
         <!-- Desktop/Tablet Asset -->
         <img src="design1.png" alt="Evoke Cup 2026 - Desktop" class="splash-img desktop-only">
@@ -105,16 +129,18 @@
         <!-- Mobile Phone Asset -->
         <img src="design1-mobile.png" alt="Evoke Cup 2026 - Mobile" class="splash-img mobile-only">
         
+        <!-- Interactive Call To Action -->
         <div id="splash-text">PRESS ANY KEY TO CONTINUE</div>
-		 <div class="splash-warning">This portal is strictly for internal Panitia Evoke 2026 use only.</div>
 
+        <!-- Security Warning Box -->
+        <div class="splash-warning">⚠️ INTERNAL USE ONLY — UNAUTHORIZED ACCESS IS PROHIBITED</div>
     </div>
 
-    <!-- Internal Policy Header Banner -->
+    <!-- Internal Policy Header Banner (Idea 1) -->
     <div class="internal-banner">INTERNAL USE ONLY — Unauthorized Access is Prohibited</div>
 
-    <!-- Main Content -->
-    <iframe src="https://www.appsheet.com/start/3777408b-7d8e-4c2a-9f7c-79707579d60c?platform=desktop#appName=Evokerebuilt-110568804&vss=H4sIAAAAAAAAA6WOzQrCMBCEX0XmnCfITURERC-KF-MhNlsJtklpUrWEvLtbf9CrepxZvm8n4Wzpso66OEHu0jstqIdEUtj0DSlIhYl3sfWVglBY6fpRjo_kjB7NyHDOyHvxUkQKkOlrg_x7g4A15KItLbWDboBZ80T5PIBcfGDIAnUX9aGi-3LGcuau9EUXyGx50G9DwtxNr412Zun5iyx1FSjfAMjnxzB0AQAA&view=Agenda%20Gede"></iframe>
+    <!-- Main Content Frame -->
+    <iframe src="https://appsheet.com"></iframe>
 
     <script>
         const overlay = document.getElementById('splash-overlay');
@@ -128,12 +154,12 @@
                 overlay.style.display = 'none';
             }, 500);
 
-            // Deregister clean up event hooks
+            // Deregister event hooks so they don't fire again
             window.removeEventListener('keydown', dismissSplash);
             window.removeEventListener('click', dismissSplash);
         }
 
-        // Initialize event listeners
+        // Initialize event listeners for both desktop and mobile users
         window.addEventListener('keydown', dismissSplash);
         window.addEventListener('click', dismissSplash);
     </script>
