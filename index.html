@@ -14,12 +14,31 @@
             overflow: hidden;
             background-color: #ffffff;
             font-family: sans-serif;
+            /* Layout structural adjustments for Idea 1 banner stacking */
+            display: flex;
+            flex-direction: column;
         }
+        
+        /* Fixed Header Banner (Idea 1) */
+        .internal-banner {
+            background-color: #721c24; /* Corporate dark red tone */
+            color: #f8d7da; /* Clear contrasting text */
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            width: 100%;
+            box-sizing: border-box;
+            flex-shrink: 0; /* Prevents the banner layout from squeezing shrinkages */
+        }
+
         iframe {
             width: 100%;
-            height: 100%;
+            flex-grow: 1; /* Automatically stretches to safely consume remaining browser space */
             border: none;
         }
+
         /* Splash Screen Overlay */
         #splash-overlay {
             position: fixed;
@@ -55,6 +74,10 @@
                 max-width: 95%; /* Offers slightly wider view on compact phones */
                 max-height: 70%;
             }
+            .internal-banner {
+                font-size: 0.75rem; /* Reduces text sizing scale for small viewports */
+                padding: 6px 8px;
+            }
         }
         
         #splash-text {
@@ -83,7 +106,12 @@
         <img src="design1-mobile.png" alt="Evoke Cup 2026 - Mobile" class="splash-img mobile-only">
         
         <div id="splash-text">PRESS ANY KEY TO CONTINUE</div>
+		 <div class="splash-warning">This portal is strictly for internal Panitia Evoke 2026 use only.</div>
+
     </div>
+
+    <!-- Internal Policy Header Banner -->
+    <div class="internal-banner">INTERNAL USE ONLY — Unauthorized Access is Prohibited</div>
 
     <!-- Main Content -->
     <iframe src="https://www.appsheet.com/start/3777408b-7d8e-4c2a-9f7c-79707579d60c?platform=desktop#appName=Evokerebuilt-110568804&vss=H4sIAAAAAAAAA6WOzQrCMBCEX0XmnCfITURERC-KF-MhNlsJtklpUrWEvLtbf9CrepxZvm8n4Wzpso66OEHu0jstqIdEUtj0DSlIhYl3sfWVglBY6fpRjo_kjB7NyHDOyHvxUkQKkOlrg_x7g4A15KItLbWDboBZ80T5PIBcfGDIAnUX9aGi-3LGcuau9EUXyGx50G9DwtxNr412Zun5iyx1FSjfAMjnxzB0AQAA&view=Agenda%20Gede"></iframe>
