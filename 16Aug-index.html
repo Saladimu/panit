@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evoke 2026 - !Panitia!</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #ffffff;
+            font-family: sans-serif;
+            /* Flex layout ensures the banner and iframe stack neatly */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Fixed Header Banner (Idea 1) */
+        .internal-banner {
+            background-color: #721c24; /* Corporate dark red tone */
+            color: #f8d7da; /* Clear contrasting text */
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            width: 100%;
+            box-sizing: border-box;
+            flex-shrink: 0; /* Prevents layout shrinkage */
+        }
+
+        iframe {
+            width: 100%;
+            flex-grow: 1; /* Stretches to fill the remaining screen space */
+            border: none;
+        }
+
+        /* Splash Screen Overlay */
+        #splash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0b1d12; /* Theme dark green color matches artwork */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer;
+            transition: opacity 0.5s ease; /* Adds smooth fade-out effect */
+            opacity: 1;
+        }
+        /* Shared image optimization styles */
+        .splash-img {
+            max-width: 90%;
+            max-height: 75%;
+            object-fit: contain;
+        }
+        /* Visibility Logic for Responsive Handling */
+        .mobile-only { display: none; }
+        .desktop-only { display: block; }
+
+        /* Trigger for Mobile Phones (screens smaller than 768px wide) */
+        @media (max-width: 767px) {
+            .mobile-only { display: block; }
+            .desktop-only { display: none; }
+            .splash-img {
+                max-width: 95%;
+                max-height: 65%;
+            }
+            #splash-text {
+                font-size: 1.2rem;
+            }
+            .splash-warning {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+                max-width: 85%;
+            }
+            .internal-banner {
+                font-size: 0.75rem;
+                padding: 6px 8px;
+            }
+        }
+        
+        #splash-text {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            animation: blink 1.5s infinite;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Splash Warning Text Configuration (Idea 2 - Bold White) */
+        .splash-warning {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-top: 25px;
+            letter-spacing: 0.5px;
+            text-align: center;
+            border: 2px solid #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            background-color: rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Splash Screen (Idea 2) -->
+    <div id="splash-overlay">
+        <!-- Desktop/Tablet Asset -->
+        <img src="design1.png" alt="Evoke Cup 2026 - Desktop" class="splash-img desktop-only">
+        
+        <!-- Mobile Phone Asset -->
+        <img src="design1-mobile.png" alt="Evoke Cup 2026 - Mobile" class="splash-img mobile-only">
+        
+        <!-- Interactive Call To Action -->
+        <div id="splash-text">PRESS ANY KEY TO CONTINUE</div>
+
+        <!-- Security Warning Box -->
+        <div class="splash-warning">⚠️ INTERNAL USE ONLY — UNAUTHORIZED ACCESS IS PROHIBITED</div>
+    </div>
+
+    <!-- Internal Policy Header Banner (Idea 1) -->
+    <div class="internal-banner">INTERNAL USE ONLY — Unauthorized Access is Prohibited</div>
+
+    <!-- Main Content Frame -->
+       <iframe src="https://www.appsheet.com/start/3777408b-7d8e-4c2a-9f7c-79707579d60c?platform=desktop#appName=Evokerebuilt-110568804&vss=H4sIAAAAAAAAA6WOzQrCMBCEX0XmnCfITURERC-KF-MhNlsJtklpUrWEvLtbf9CrepxZvm8n4Wzpso66OEHu0jstqIdEUtj0DSlIhYl3sfWVglBY6fpRjo_kjB7NyHDOyHvxUkQKkOlrg_x7g4A15KItLbWDboBZ80T5PIBcfGDIAnUX9aGi-3LGcuau9EUXyGx50G9DwtxNr412Zun5iyx1FSjfAMjnxzB0AQAA&view=Agenda%20Gede"></iframe>
+    <script>
+        const overlay = document.getElementById('splash-overlay');
+
+        function dismissSplash() {
+            // Step 1: Start fading out out visually
+            overlay.style.opacity = '0';
+            
+            // Step 2: Fully clear DOM space after the 500ms transition finishes
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 500);
+
+            // Deregister event hooks so they don't fire again
+            window.removeEventListener('keydown', dismissSplash);
+            window.removeEventListener('click', dismissSplash);
+        }
+
+        // Initialize event listeners for both desktop and mobile users
+        window.addEventListener('keydown', dismissSplash);
+        window.addEventListener('click', dismissSplash);
+    </script>
+</body>
+</html>
